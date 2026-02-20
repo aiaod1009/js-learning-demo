@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>学生信息管理</title>
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+
+<body>
+  <h1>学生就业统计表</h1>
+  <form class="info" autocomplete="off">
+    姓名：<input type="text" class="uname" name="uname" />
+    年龄：<input type="text" class="age" name="age" />
+    性别:
+    <select name="gender" class="gender">
+      <option value="男">男</option>
+      <option value="女">女</option>
+    </select>
+    薪资：<input type="text" class="salary" name="salary" />
+    就业城市：<select name="city" class="city">
+      <option value="北京">北京</option>
+      <option value="上海">上海</option>
+      <option value="广州">广州</option>
+      <option value="深圳">深圳</option>
+      <option value="南京">南京</option>
+    </select>
+    <button class="add">＋添加</button>
+  </form>
+
+  <div class="box">
+    <p>共有数据<span>0</span>条</p>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>性别</th>
+        <th>薪资</th>
+        <th>就业城市</th>
+        <th>录入时间</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- 
+        <tr>
+          <td>1001</td>
+          <td>欧阳霸天</td>
+          <td>19</td>
+          <td>男</td>
+          <td>15000</td>
+          <td>上海</td>
+          <td>2024-06-01 10:00:00</td>
+          <td>
+            <a href="javascript:">删除</a>
+          </td>
+        </tr> 
+        -->
+    </tbody>
+  </table>
+  <script>
+    // 参考数据
+    const initData = [
+      {
+        stuId: 1,
+        uname: '欧阳霸天',
+        age: 19,
+        gender: '男',
+        salary: '20000',
+        city: '上海',
+        time: '2026/6/1 10:00:00'
+      }
+    ]
+    const info = document.querySelector('.info')
+    const uname = document.querySelector('.uname')
+    const age = document.querySelector('.age')
+    const gender = document.querySelector('.gender')
+    const salary = document.querySelector('.salary')
+    const city = document.querySelector('.city')
+    const tbody = document.querySelector('tbody')
+    const items = document.querySelectorAll('[name]')
+
+
+    // localStorage.setItem('data', JSON.stringify(initData))
+    const arr = JSON.parse(localStorage.getItem('data')) || []
+
+    function render() {
+      const trArr = arr.map(function (ele, index) {
+        return `
+        <tr>
+          <td>${ele.stuId}</td>
+          <td>${ele.uname}</td>
+          <td>${ele.age}</td>
+          <td>${ele.gender}</td>
+          <td>${ele.salary}</td>
+          <td>${ele.city}</td>
+          <td>${ele.time}</td>
+          <td>
+            <a href="javascript:" data-id="${index}">删除</a>
+          </td>
+        </tr> 
+        `
+      })
+      console.log(trArr)
+      tbody.innerHTML = trArr.join('')
+      document.querySelector('.box span').innerHTML = arr.length
+    }
+    render()
+    info.addEventListener('submit', function (e) {
+      e.preventDefault()
+      // console.log('提交了')
+
+      if (!uname.value || !age.value || !salary.value) {
+        return alert('输入不能为空')
+      }
+      arr.push({
+        stuId: arr.length ? arr[arr.length - 1].stuId + 1 : 1,
+        uname: uname.value,
+        age: age.value,
+        gender: gender.value,
+        salary: salary.value,
+        city: city.value,
+        time: new Date().toLocaleString()
+      })
+      // 调用渲染函数
+      render()
+      this.reset() // 表单重置，清空输入框的内容
+      localStorage.setItem('data', JSON.stringify(arr))
+    })
+
+    tbody.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') {
+        // console.log(e.target.dataset.id)
+        if (confirm('确定要删除吗？')) {
+          arr.splice(e.target.dataset.id, 1)
+          // console.log(arr)
+          render()
+          localStorage.setItem('data', JSON.stringify(arr))
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>
