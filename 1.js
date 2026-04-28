@@ -30,3 +30,16 @@
 
 // let buf5 = Buffer.from('hello');
 // console.log(buf5[0].toString(16));  // 几进制
+
+// 文件写入
+// 导入模块
+const { log } = require('console');
+const fs = require('fs');
+// 写入文件
+fs.writeFile('./hello.txt', 'hello Node.js', err => {
+  if (err) {
+    console.log('写入失败');
+    return;
+  }
+  console.log('写入成功')
+});
