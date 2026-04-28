@@ -43,3 +43,15 @@ fs.writeFile('./hello.txt', 'hello Node.js', err => {
   }
   console.log('写入成功')
 });
+
+// 追加写入
+fs.appendFile('./hello.txt', '\nhello world', err => {
+  if (err) {
+    console.log('追加写入失败');
+    return;
+  }
+  console.log('追加写入成功')
+});
+fs.appendFileSync('./hello.txt', '温故而知新')
+
+// {flag: 'a'} // 追加写入
