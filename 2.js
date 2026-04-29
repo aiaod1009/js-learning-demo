@@ -68,8 +68,18 @@ const fs = require('fs');
 //   console.log('移动成功');
 // });
 
-// 文件的删除
-fs.unlink('./观书有感.txt', err => {
+// 文件的删除  同步unlinkSync
+// fs.unlink('./观书有感.txt', err => {
+//   if (err) {
+//     console.log('删除失败');
+//     return;
+//   }
+//   console.log('删除成功');
+// });
+
+
+// 调用 rm 方法
+fs.rm('./资料/hi.txt', err => {
   if (err) {
     console.log('删除失败');
     return;
