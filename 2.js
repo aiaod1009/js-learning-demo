@@ -125,10 +125,21 @@ const fs = require('fs');
 // });
 
 // 递归删除
-fs.rm('./a', { recursive: true }, err => {
-  if (err) {
-    console.log('删除失败');
-    return;
-  }
-  console.log('删除成功');
-});
+// fs.rm('./a', { recursive: true }, err => {
+//   if (err) {
+//     console.log('删除失败');
+//     return;
+//   }
+//   console.log('删除成功');
+// });
+
+// stat方法 状态
+// fs.stat('./嘿嘿.mp4', (err, stats) => {
+//   if (err) {
+//     console.log('获取状态失败');
+//     return;
+//   }
+//   // console.log(stats);
+//   console.log(stats.isFile());
+//   console.log(stats.isDirectory());
+// });
