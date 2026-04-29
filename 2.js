@@ -143,3 +143,10 @@ const fs = require('fs');
 //   console.log(stats.isFile());
 //   console.log(stats.isDirectory());
 // });
+
+// 相对路径 url
+// fs.writeFileSync('./index.txt', 'love')
+// fs.writeFileSync('index.html', 'love')
+
+// 绝对路径
+fs.writeFileSync('E:/index.txt', 'love')
