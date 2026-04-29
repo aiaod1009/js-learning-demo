@@ -152,4 +152,18 @@ const fs = require('fs');
 // fs.writeFileSync('E:/index.txt', 'love')
 // '全局变量' 保存的是:所在文件的所在目录的绝对路径
 // console.log(__dirname);
-fs.writeFileSync(__dirname + '/index.txt', 'love')
+// fs.writeFileSync(__dirname + '/index.txt', 'love')
+
+// 批量重命名
+const files = fs.readdirSync('./');
+// 遍历数组
+files.forEach(file => {
+  // 拆分文件名
+  let data = item.split('-');
+  let [num, name] = data;
+  if (num < 10) {
+    num = '0' + num;
+  }
+  let newName = num + '-' + name;
+  fs.renameSync(`./${file}`, `./${newName}`);
+});
