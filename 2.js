@@ -18,5 +18,15 @@ ws.close();
 // });
 
 // 同步读取
-let data = fs.readFileSync('./观书有感.txt');
-console.log(data.toString());
+// let data = fs.readFileSync('./观书有感.txt');
+// console.log(data.toString());
+
+// 创建读取流对象
+const rs = fs.createReadStream('./观书有感.txt');
+// 监听data事件   chunk 块
+rs.on('data', chunk => {
+  console.log(chunk.toString());
+});
+rs.on('end', () => {
+  console.log('读取完成');
+});
