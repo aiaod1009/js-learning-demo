@@ -60,10 +60,19 @@ const fs = require('fs');
 // });
 
 // 文件的移动
-fs.rename('./hi.txt', './资料/hi.txt', err => {
+// fs.rename('./hi.txt', './资料/hi.txt', err => {
+//   if (err) {
+//     console.log('移动失败');
+//     return;
+//   }
+//   console.log('移动成功');
+// });
+
+// 文件的删除
+fs.unlink('./观书有感.txt', err => {
   if (err) {
-    console.log('移动失败');
+    console.log('删除失败');
     return;
   }
-  console.log('移动成功');
+  console.log('删除成功');
 });
