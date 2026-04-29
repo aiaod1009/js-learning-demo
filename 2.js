@@ -144,9 +144,12 @@ const fs = require('fs');
 //   console.log(stats.isDirectory());
 // });
 
-// 相对路径 url
+// 相对路径 url  参照物:命令行的工作目录
 // fs.writeFileSync('./index.txt', 'love')
 // fs.writeFileSync('index.html', 'love')
 
 // 绝对路径
-fs.writeFileSync('E:/index.txt', 'love')
+// fs.writeFileSync('E:/index.txt', 'love')
+// '全局变量' 保存的是:所在文件的所在目录的绝对路径
+// console.log(__dirname);
+fs.writeFileSync(__dirname + '/index.txt', 'love')
