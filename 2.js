@@ -7,3 +7,11 @@ ws.write('天光云影共徘徊。\n');
 ws.write('问渠哪得清如许？\n');
 ws.write('为有源头活水来。\n');
 ws.close();
+
+fs.readFile('./观书有感.txt', (err, data) => {
+  if (err) {
+    console.log('读取失败');
+    return;
+  }
+  console.log(data.toString());
+});
