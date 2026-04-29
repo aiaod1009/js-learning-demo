@@ -1,3 +1,4 @@
+const { log } = require('console');
 const fs = require('fs');
 
 // const ws = fs.createWriteStream('./观书有感.txt');
@@ -155,15 +156,26 @@ const fs = require('fs');
 // fs.writeFileSync(__dirname + '/index.txt', 'love')
 
 // 批量重命名
-const files = fs.readdirSync('./');
-// 遍历数组
-files.forEach(file => {
-  // 拆分文件名
-  let data = item.split('-');
-  let [num, name] = data;
-  if (num < 10) {
-    num = '0' + num;
-  }
-  let newName = num + '-' + name;
-  fs.renameSync(`./${file}`, `./${newName}`);
-});
+// const files = fs.readdirSync('./');
+// // 遍历数组
+// files.forEach(file => {
+//   // 拆分文件名
+//   let data = item.split('-');
+//   let [num, name] = data;
+//   if (num < 10) {
+//     num = '0' + num;
+//   }
+//   let newName = num + '-' + name;
+//   fs.renameSync(`./${file}`, `./${newName}`);
+// });
+
+// path模块
+const path = require('path');
+// resolve 解决, 拼接规范的绝对路径
+// console.log(path.resolve(__dirname, 'index.txt'));
+
+// sep 分隔符
+// console.log(path.sep); // windows \   linux /
+// __filename 当前文件的绝对路径
+let str = 'E:\\learning-demo\\index.txt'
+console.log(path.parse(str)); // index.txt
