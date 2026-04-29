@@ -33,15 +33,37 @@ const fs = require('fs');
 
 
 // 复制文件
-// 方式一
+// 方式一 占用内存大
 // let data = fs.readFileSync('./嘿嘿.mp4');
 // fs.writeFileSync('./嘿嘿2.mp4', data);
 
-// 方式二
-const rs = fs.createReadStream('./嘿嘿.mp4');
-const ws = fs.createWriteStream('./嘿嘿3.mp4');
+// 方式二 占用内存少
+// const rs = fs.createReadStream('./嘿嘿.mp4');
+// const ws = fs.createWriteStream('./嘿嘿3.mp4');
 
-// 绑定data事件
-rs.on('data', chunk => {
-  ws.write(chunk);
+// // 绑定data事件
+// rs.on('data', chunk => {
+//   ws.write(chunk);
+// });
+
+// rs.on('end', () => {
+//   console.log(process.memoryUsage());
+// })
+
+// 文件重命名与移动
+// fs.rename('./hello.txt', './hi.txt', err => {
+//   if (err) {
+//     console.log('重命名失败');
+//     return;
+//   }
+//   console.log('重命名成功');
+// });
+
+// 文件的移动
+fs.rename('./hi.txt', './资料/hi.txt', err => {
+  if (err) {
+    console.log('移动失败');
+    return;
+  }
+  console.log('移动成功');
 });
