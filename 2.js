@@ -170,12 +170,12 @@ const fs = require('fs');
 // });
 
 // path模块
-const path = require('path');
+// const path = require('path');
 // resolve 解决, 拼接规范的绝对路径
 // console.log(path.resolve(__dirname, 'index.txt'));
 
 // sep 分隔符
 // console.log(path.sep); // windows \   linux /
 // __filename 当前文件的绝对路径
-let str = 'E:\\learning-demo\\index.txt'
-console.log(path.parse(str)); // index.txt
+// let str = 'E:\\learning-demo\\index.txt'
+// console.log(path.parse(str)); // index.txt
