@@ -14,4 +14,5 @@ https://www.baidu.com
 键值对，记录浏览器相关信息，交互行为，http和https
 # 请求体
 很灵活
-http响应报文
+
+# 响应报文
