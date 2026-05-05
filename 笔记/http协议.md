@@ -12,3 +12,4 @@ https://www.baidu.com
 # 请求头
 键值对，记录浏览器相关信息，交互行为，http和https
 # 请求体
+很灵活
