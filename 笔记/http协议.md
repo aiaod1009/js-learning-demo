@@ -1,4 +1,5 @@
-# 请求行
+# 请求报文
+## 请求行
 GET获取
 POST新增
 PUT/PATCH更新
@@ -13,3 +14,4 @@ https://www.baidu.com
 键值对，记录浏览器相关信息，交互行为，http和https
 # 请求体
 很灵活
+http响应报文
