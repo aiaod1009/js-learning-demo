@@ -18,10 +18,7 @@ https://www.baidu.com
 # 响应报文
 ## 响应行
 http版本号+响应状态码+响应状态的描述
-200
-403
-404
-500
+200 403 404 500
 描述:
 OK Forbidden Not Found
 ## 响应头
