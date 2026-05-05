@@ -24,3 +24,5 @@ http版本号+响应状态码+响应状态的描述
 500
 描述:
 OK Forbidden Not Found
+## 响应头
+与服务器相关内容
