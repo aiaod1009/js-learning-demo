@@ -26,3 +26,6 @@ http版本号+响应状态码+响应状态的描述
 OK Forbidden Not Found
 ## 响应头
 与服务器相关内容
+## 响应体
+内容格式灵活
+常见：HTML,CSS,JS，图片，视频，json
