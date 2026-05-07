@@ -9,7 +9,7 @@ const server = http.createServer((request, response) => {
     body += chunk;
   });
   request.on('end', () => {
-    console.log(body);
+    console.log(body);// 把每一段数据拼接到 body 里
     response.end('Hello HTTP!'); // 设置响应体
   });
 });
