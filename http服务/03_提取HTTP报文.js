@@ -9,6 +9,9 @@ const server = http.createServer((request, response) => {
   console.log(request.url);
   // 获取HTTP协议的版本号
   console.log(request.httpVersion);
+  // 获取请求头
+  console.log(request.headers);
+  // 可以.host
   response.end('Hello HTTP!'); // 设置响应体
 });
 // 如果有中文会乱码
