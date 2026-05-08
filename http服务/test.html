@@ -15,7 +15,7 @@
     }
 
     table tr:nth-child(even) {
-      background-color: #fcb;
+      background-color: rgb(215, 179, 202);
     }
 
     table,
@@ -49,4 +49,14 @@
       <td>9</td>
     </tr>
   </table>
+  <script>
+    let tds = document.querySelectorAll('td');
+    tds.forEach(item => {
+      item.onclick = function () {
+        this.style.backgroundColor = 'white';
+      }
+    })
+  </script>
 </body>
+
+</html>
