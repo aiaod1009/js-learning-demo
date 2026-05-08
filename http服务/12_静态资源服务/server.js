@@ -1,7 +1,16 @@
 // 导入http模块
 const http = require('http');
 const fs = require('fs');
-
+const path = require('path');
+// 声明一个变量
+let mimes = {
+  html: 'text/html;',
+  css: 'text/css;',
+  js: 'text/javascript;',
+  png: 'image/png;',
+  jpg: 'image/jpeg;',
+  json: 'application/json;'
+}
 // 创建服务对象
 const server = http.createServer((request, response) => {
   let { pathname } = new URL(request.url, 'http://127.0.0.1');
@@ -12,11 +21,20 @@ const server = http.createServer((request, response) => {
   // 读取文吉件 fs 异步 API
   fs.readFile(filePath, (err, data) => {
     if (err) {
-      response.setHeader('Content-Type', 'text/html; charset=utf-8');
+      response.setHeader('Content-type', 'text/html; charset=utf-8');
       response.statusCode = 500;
       response.end('文件读取失败~~');
       return;
     }
+    // 获取文件后缀名
+    let ext = path.extname(filePath).slice(1);
+    let type = mimes[ext];
+    if (type) {
+      response.setHeader('content-type', type);
+    } else {
+      response.setHeader('content-type', 'application/octet-stream');
+    }
+    // console.log(ext);
     response.end(data); // 设置响应体
   })
   // if (pathname === '/index.html') {
