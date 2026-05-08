@@ -10,7 +10,7 @@ const server = http.createServer((request, response) => {
   } else if (method === 'GET' && pathname === '/reg') {
     response.end('注册页面');
   } else {
-    response.end('404 Not Found');
+    response.end('Not Found');
   }
 });
 
