@@ -21,6 +21,15 @@ const server = http.createServer((request, response) => {
   // 读取文吉件 fs 异步 API
   fs.readFile(filePath, (err, data) => {
     if (err) {
+      // 设置字符集
+      response.setHeader('Content-type', 'text/html; charset=utf-8');
+      // 判断错误的代号
+      switch (err.code) {
+        case 'ENOENT':
+          response.statusCode = 404;
+          response.end('<h1>404 Not Found</h1>');
+      }
+
       response.setHeader('Content-type', 'text/html; charset=utf-8');
       response.statusCode = 500;
       response.end('文件读取失败~~');
