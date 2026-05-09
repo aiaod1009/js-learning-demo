@@ -29,10 +29,6 @@ const server = http.createServer((request, response) => {
           response.statusCode = 404;
           response.end('<h1>404 Not Found</h1>');
       }
-
-      response.setHeader('Content-type', 'text/html; charset=utf-8');
-      response.statusCode = 500;
-      response.end('文件读取失败~~');
       return;
     }
     // 获取文件后缀名
