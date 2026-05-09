@@ -12,7 +12,12 @@ let mimes = {
   json: 'application/json;'
 }
 // 创建服务对象
-const server = http.createServer((request, response) => {
+const server = http.createServer((request, response) => {、
+  if (request.method !== 'GET') {
+    response.statusCode = 405;
+    response.end('<h1>405 Method Not Allowed</h1>');
+    return;
+  }
   let { pathname } = new URL(request.url, 'http://127.0.0.1');
   // 声明一个变量
   let root = __dirname + '/page';
