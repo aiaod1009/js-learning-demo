@@ -28,6 +28,9 @@ const server = http.createServer((request, response) => {
         case 'ENOENT':
           response.statusCode = 404;
           response.end('<h1>404 Not Found</h1>');
+        case "EISDIR":
+          response.statusCode = 403;
+          response.end('<h1>403 Forbidden</h1>');
       }
       return;
     }
