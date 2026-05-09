@@ -12,7 +12,7 @@ let mimes = {
   json: 'application/json;'
 }
 // 创建服务对象
-const server = http.createServer((request, response) => {、
+const server = http.createServer((request, response) => {
   if (request.method !== 'GET') {
     response.statusCode = 405;
     response.end('<h1>405 Method Not Allowed</h1>');
@@ -36,6 +36,9 @@ const server = http.createServer((request, response) => {、
         case "EISDIR":
           response.statusCode = 403;
           response.end('<h1>403 Forbidden</h1>');
+        default:
+          response.statusCode = 500;
+          response.end('<h1>500 Internal Server Error</h1>');
       }
       return;
     }
