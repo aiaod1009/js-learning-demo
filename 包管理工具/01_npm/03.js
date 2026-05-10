@@ -14,7 +14,6 @@ const server = http.createServer((request, response) => {
   // 可以.host
   response.end('Hello HTTP!nodemon'); // 设置响应体
 });
-// 如果有中文会乱码
 
 // 3. 监听端口，启动服务
 server.listen(3000, () => {
