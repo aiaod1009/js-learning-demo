@@ -7,7 +7,9 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "node 03.js",
+    "start": "node 03.js"
   },
   "dependencies": {
     "jquery": "^4.0.0",
