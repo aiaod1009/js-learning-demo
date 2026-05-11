@@ -8,8 +8,11 @@
 </head>
 
 <body>
-  <h1>hhhh</h1>
-  <img src="http://127.0.0.1:3000/images/example.jpg" alt="">
+  <% if (isLogin) { %>
+    <p>欢迎来到后台首页</p>
+    <% } else { %>
+      <p>请先登录</p>
+      <% } %>
 </body>
 
 </html>

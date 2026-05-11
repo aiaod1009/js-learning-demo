@@ -4,12 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>西游四人组</title>
 </head>
 
 <body>
-  <h1>hhhh</h1>
-  <img src="http://127.0.0.1:3000/images/example.jpg" alt="">
+  <ul>
+    <% xiyou.forEach(item=> { %>
+      <li>
+        <%= item %>
+      </li>
+      <%}) %>
+  </ul>
 </body>
 
 </html>
