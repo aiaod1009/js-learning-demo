@@ -1,0 +1,34 @@
+# 依赖目录（最关键，必须忽略）
+node_modules/
+.pnpm-store/
+.npm/
+.yarn/
+.yarn-cache/
+
+# 日志文件
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 环境变量文件（包含敏感信息）
+.env
+.env.*
+!.env.example
+
+# IDE 配置文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 临时文件/编译产物
+dist/
+build/
+*.tmp
+*.temp
