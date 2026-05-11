@@ -13,6 +13,10 @@ app.get("/", (req, res) => {
   res.end('home');
 })
 
+app.post("/login", (req, res) => {
+  res.end('Hello Express POST!');
+})
+
 //4.监听端口，启动服务
 app.listen(3000, () => {
   console.log('服务已经启动,端口3000正在监听中....');
