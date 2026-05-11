@@ -8,7 +8,7 @@ const app = express();
 
 app.get("/:id.html", (req, res) => {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  res.end('商品详情');
+  res.end('hello');
 });
 
 
