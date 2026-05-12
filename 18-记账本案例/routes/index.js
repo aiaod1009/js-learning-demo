@@ -31,8 +31,9 @@ router.post('/account', (req, res) => {
 //删除记录
 router.get('/account/:id', (req, res) => {
   //获取params.id
-  db.get('account').remove({ id: id }).write();
-  res.send("删除成功")
+  let id = req.params.id;
+  db.get('accounts').remove({ id: id }).write();
+  res.render('success', { msg: '删除成功哦~~~', url: '/account' });
 })
 
 module.exports = router;
