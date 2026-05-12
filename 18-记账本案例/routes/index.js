@@ -28,4 +28,11 @@ router.post('/account', (req, res) => {
   res.render('success', { msg: '添加成功哦~~~', url: '/account' });
 });
 
+//删除记录
+router.get('/account/:id', (req, res) => {
+  //获取params.id
+  db.get('account').remove({ id: id }).write();
+  res.send("删除成功")
+})
+
 module.exports = router;
