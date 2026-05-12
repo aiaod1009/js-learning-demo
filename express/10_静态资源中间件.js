@@ -5,7 +5,7 @@ const path = require('path');
 //创建应用对象
 const app = express();
 
-//声明中间件函数
+//声明中间件函数(静态资源中间件，图片也可以不止css啥的)
 app.use(express.static(__dirname + '/public'));
 
 //使用中间件函数

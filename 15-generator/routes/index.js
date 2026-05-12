@@ -29,7 +29,7 @@ router.post('/portrait', (req, res) => {
     // console.log(fields);
     // console.log(files);
     // 服务器保存该图片的访问URL
-    let url = '/images/' + files.portrait.newFilename;// 将来将此数据保存在数据库中
+    let url = '-***ges/' + files.portrait.newFilename;// 将来将此数据保存在数据库中
 
     res.send(url);
   }

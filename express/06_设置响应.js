@@ -15,9 +15,9 @@ app.get("/response", (req, res) => {
   // res.end(' hello');
 
   //express响应
-  // res.status(500);
-  // res.set('aaa', 'bbb');
-  // res.send('你好 express'); // send方法会自动设置Content-Type和Content-Length
+  res.status(500);
+  res.set('aaa', 'bbb');
+  res.send('你好 express'); // send方法会自动设置Content-Type和Content-Length
   // res.status(200).set('aaa', 'bbb').send('你好 express'); //链式调用
 });
 
