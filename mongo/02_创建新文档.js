@@ -8,7 +8,10 @@ mongoose.connection.once('open', () => {
   let BookSchema = new mongoose.Schema({
     name: String,
     author: String,
-    price: Number
+    price: Number,
+    is_hot: Boolean,
+    tags: Array,
+    pub_time: Date
   });
   //创建模型对象 对文档操作的封装对象
   let BookModel = mongoose.model('books', BookSchema);
@@ -16,7 +19,10 @@ mongoose.connection.once('open', () => {
   BookModel.create({
     name: '三体',
     author: '刘慈欣',
-    price: 99
+    price: 99,
+    is_hot: true,
+    tags: ['科幻', '小说'],
+    pub_time: new Date()
   }, (err, data) => {
     if (err) {
       console.log(err);
