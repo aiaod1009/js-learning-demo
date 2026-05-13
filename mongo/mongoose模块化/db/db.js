@@ -4,6 +4,11 @@
  * @param {*} error 连接失败回调
  */
 module.exports = function (sucess, error) {
+  if (typeof error !== 'function') {
+    error = () => {
+      console.log('连接失败了哦~~~');
+    }
+  }
   //1. 安装 mongoose
   //2. 导入 mongoose
   const mongoose = require('mongoose');
