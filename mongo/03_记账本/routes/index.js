@@ -23,9 +23,9 @@ router.get('/account', function (req, res, next) {
       return;
     }
     // console.log(data);
-    //     前面 = 给 EJS 页面用的变量名
+    // 前面 = 给 EJS 页面用的变量名
     // 后面 = 你后端真实的数据
-    res.render('list', { accounts: data });
+    res.render('list', { accounts: data, moment: moment });
   });
 });
 //添加记录
@@ -57,7 +57,13 @@ router.post('/account', (req, res) => {
 router.get('/account/:id', (req, res) => {
   //获取params.id
   let id = req.params.id;
-  db.get('accounts').remove({ id: id }).write();
-  res.render('success', { msg: '删除成功哦~~~', url: '/account' });
-})
+  // db.get('accounts').remove({ id: id }).write();
+  AccountModel.deleteOne({ _id: id }, (err, data) => {
+    if (err) {
+      res.status(500).send('删除失败了哦~~~');
+      return;
+    }
+    res.render('success', { msg: '删除成功哦~~~', url: '/account' });
+  })
+});
 module.exports = router;
