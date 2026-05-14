@@ -23,8 +23,10 @@ router.get('/account/create', function (req, res, next) {
 });
 //新增记录
 router.post('/account', (req, res) => {
-  let id = shortid.generate();
-  db.get('accounts').unshift({ id: id, ...req.body }).write();
+  // let id = shortid.generate();
+  // db.get('accounts').unshift({ id: id, ...req.body }).write();
+  // 数字转成日期对象moment.js
+  console.log(req.body);
   res.render('success', { msg: '添加成功哦~~~', url: '/account' });
 });
 
