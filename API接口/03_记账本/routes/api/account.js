@@ -17,9 +17,6 @@ router.get('/account', function (req, res, next) {
       })
       return;
     }
-    // console.log(data);
-    // 前面 = 给 EJS 页面用的变量名
-    // 后面 = 你后端真实的数据
     res.json({
       code: '0000',
       msg: '读取成功',
@@ -27,28 +24,26 @@ router.get('/account', function (req, res, next) {
     });
   });
 });
-//添加记录
-router.get('/account/create', function (req, res, next) {
-  res.render('create');
-});
+
 //新增记录
 router.post('/account', (req, res) => {
-  // let id = shortid.generate();
-  // db.get('accounts').unshift({ id: id, ...req.body }).write();
-  // 数字转成日期对象moment.js
-  // req.body.time = moment(req.body.time).toDate();
-  // 或者
-  // req.body.time = new Date(req.body.time);
-  // console.log(req.body);
   AccountModel.create({
     ...req.body,
     time: moment(req.body.time).toDate()
   }, (err, data) => {
     if (err) {
-      res.status(500).send('添加失败了哦~~~');
+      res.json({
+        code: '1002',
+        msg: '添加失败了哦~~~',
+        data: null
+      });
       return;
     }
-    res.render('success', { msg: '添加成功哦~~~', url: '/account' });
+    res.json({
+      code: '0000',
+      msg: '添加成功哦~~~',
+      data: data
+    });
   })
 });
 
