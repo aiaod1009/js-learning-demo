@@ -1,0 +1,25 @@
+{
+  "song": [
+    {
+      "id": "1",
+      "name": "夜曲",
+      "singer": "周杰伦"
+    },
+    {
+      "id": "2",
+      "name": "晴天",
+      "singer": "周杰伦"
+    },
+    {
+      "id": "3",
+      "name": "稻香",
+      "singer": "周杰伦"
+    },
+    {
+      "name": "青花瓷",
+      "singer": "周杰伦",
+      "id": "_Hl0p9bwVhs"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
