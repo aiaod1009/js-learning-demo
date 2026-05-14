@@ -1,17 +1,8 @@
 var express = require('express');
 var router = express.Router();
-//导入lowdb
-const low = require('lowdb');
-//导入lowdb的文件存储适配器
-const FileSync = require('lowdb/adapters/FileSync');
-//创建适配器对象，指定数据库文件存储在data目录下，文件名为db.json
-const adapter = new FileSync(__dirname + '/../data/db.json');
-// 获取db对象
-const db = low(adapter)
-//导入 shortid
-const shortid = require('shortid');
+
 const moment = require('moment');
-const AccountModel = require('../models/AccountModel');
+const AccountModel = require('../../models/AccountModel');
 
 //记账本列表
 router.get('/account', function (req, res, next) {
