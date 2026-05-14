@@ -48,16 +48,23 @@ router.post('/account', (req, res) => {
 });
 
 //删除记录
-router.get('/account/:id', (req, res) => {
+router.delete('/account/:id', (req, res) => {
   //获取params.id
   let id = req.params.id;
-  // db.get('accounts').remove({ id: id }).write();
   AccountModel.deleteOne({ _id: id }, (err, data) => {
     if (err) {
-      res.status(500).send('删除失败了哦~~~');
+      res.json({
+        code: '1003',
+        msg: '删除失败了哦~~~',
+        data: null
+      });
       return;
     }
-    res.render('success', { msg: '删除成功哦~~~', url: '/account' });
+    res.json({
+      code: '0000',
+      msg: '删除成功哦~~~',
+      data: null
+    });
   })
 });
 module.exports = router;
