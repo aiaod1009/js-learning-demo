@@ -74,7 +74,7 @@ router.get('/account/:id', (req, res) => {
   let { id } = req.params;
   AccountModel.findById(id, (err, data) => {
     if (err) {
-      res.json({
+      return res.json({
         code: '1004',
         msg: '读取失败了哦~~~',
         data: null
@@ -86,5 +86,34 @@ router.get('/account/:id', (req, res) => {
       data: data
     });
   });
+});
+
+//更新单个账单信息
+router.patch('/account/:id', (req, res) => {
+  let { id } = req.params;
+  AccountModel.updateOne({ _id: id }, req.body, (err, data) => {
+    if (err) {
+      return res.json({
+        code: '1005',
+        msg: '更新失败了哦~~~',
+        data: null
+      });
+    }
+
+    AccountModel.findById(id, (err, data) => {
+      if (err) {
+        return res.json({
+          code: '1004',
+          msg: '读取失败了哦~~~',
+          data: null
+        });
+      }
+      res.json({
+        code: '0000',
+        msg: '更新成功哦~~~',
+        data: data
+      });
+    })
+  })
 });
 module.exports = router;
