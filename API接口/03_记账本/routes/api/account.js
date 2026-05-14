@@ -10,13 +10,21 @@ router.get('/account', function (req, res, next) {
   // let accounts = db.get('accounts').value();
   AccountModel.find().sort({ time: -1 }).exec((err, data) => {
     if (err) {
-      res.status(500).send('读取失败了哦~~~');
+      res.json({
+        code: '1001',
+        msg: '读取失败了哦~~~',
+        data: null
+      })
       return;
     }
     // console.log(data);
     // 前面 = 给 EJS 页面用的变量名
     // 后面 = 你后端真实的数据
-    res.render('list', { accounts: data, moment: moment });
+    res.json({
+      code: '0000',
+      msg: '读取成功',
+      data: data
+    });
   });
 });
 //添加记录
