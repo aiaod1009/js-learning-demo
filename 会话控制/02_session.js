@@ -8,7 +8,7 @@ const MongoStore = require('connect-mongo');
 const app = express();
 app.use(session({
   name: 'sid',      // 设置cookie的name，默认值是：connect.sid
-  secret: 'atguigu', // 参与加密的字符串（又称签名）
+  secret: 'atguigu', // 参与加密的字符串（又称签名）   加盐
   saveUninitialized: false, // 是否为每次请求都设置一个cookie用来存储session的id
   resave: true,    // 是否在每次请求时重新保存session
   store: MongoStore.create({
