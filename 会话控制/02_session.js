@@ -39,11 +39,17 @@ app.get('/login', (req, res) => {
 app.get('/cart', (req, res) => {
   //检测session是否存在用户数据
   if (req.session.username) {
-
+    res.send('欢迎来到购物车页面，' + req.session.username);
   } else {
     res.send('请先登录');
   }
 });
+//session的销毁（退出登录）
+app.get('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.send('退出登录成功');
 
+  });
+});
 // 启动服务
 app.listen(3000);
