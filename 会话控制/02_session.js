@@ -6,13 +6,14 @@ const MongoStore = require('connect-mongo');
 
 // 创建应用对象
 const app = express();
+//配置session中间件
 app.use(session({
   name: 'sid',      // 设置cookie的name，默认值是：connect.sid
   secret: 'atguigu', // 参与加密的字符串（又称签名）   加盐
   saveUninitialized: false, // 是否为每次请求都设置一个cookie用来存储session的id
   resave: true,    // 是否在每次请求时重新保存session
   store: MongoStore.create({
-    mongoUrl: 'mongodb://127.0.0.1:27017/project' // 数据库的连接配置
+    mongoUrl: 'mongodb://127.0.0.1:27017/bilibili' // 数据库的连接配置
   }),
   cookie: {
     httpOnly: true, // 开启后前端无法通过 JS 操作
@@ -24,6 +25,16 @@ app.use(session({
 app.get('/', (req, res) => {
   res.send('home')
 })
+
+app.get('/login', (req, res) => {
+  if (req.query.username === 'admin' && req.query.password === 'admin') {
+    req.session.username = 'admin';
+    req.session.uid = '258aefccc';
+    res.send('登录成功');
+  } else {
+    res.send('登录失败');
+  }
+});
 
 // 启动服务
 app.listen(3000);
