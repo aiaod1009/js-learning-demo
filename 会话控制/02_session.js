@@ -25,7 +25,7 @@ app.use(session({
 app.get('/', (req, res) => {
   res.send('home')
 })
-
+// 登录
 app.get('/login', (req, res) => {
   if (req.query.username === 'admin' && req.query.password === 'admin') {
     req.session.username = 'admin';
@@ -33,6 +33,15 @@ app.get('/login', (req, res) => {
     res.send('登录成功');
   } else {
     res.send('登录失败');
+  }
+});
+//session的读取
+app.get('/cart', (req, res) => {
+  //检测session是否存在用户数据
+  if (req.session.username) {
+
+  } else {
+    res.send('请先登录');
   }
 });
 
