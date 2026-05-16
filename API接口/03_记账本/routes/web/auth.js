@@ -38,6 +38,9 @@ router.post('/login', (req, res) => {
     if (!data) {
       return res.send('用户名或密码错误，请重新登录~~');
     }
+    //写入session
+    req.session.username = data.username;
+    req.session._id = data._id;
 
     //登录成功响应
     res.render('success', { msg: '登录成功', url: '/account' });
