@@ -1,9 +1,17 @@
-var express = require('express');
-var router = express.Router();
-
+//导入express模块
+const express = require('express');
+//导入 moment 模块
 const moment = require('moment');
 const AccountModel = require('../../models/AccountModel');
-let checkLoginMiddleware = require('../../middlewares/checkLoginMiddleware');
+const checkLoginMiddleware = require('../../middlewares/checkLoginMiddleware');
+
+//创建路由对象
+const router = express.Router();
+
+//添加首页路由规则
+router.get('/', (req, res) => {
+  res.redirect('/account');
+});
 
 //记账本列表
 router.get('/account', checkLoginMiddleware, function (req, res, next) {
@@ -22,10 +30,12 @@ router.get('/account', checkLoginMiddleware, function (req, res, next) {
     res.render('list', { accounts: data, moment: moment });
   });
 });
+
 //添加记录
 router.get('/account/create', checkLoginMiddleware, function (req, res, next) {
   res.render('create');
 });
+
 //新增记录
 router.post('/account', checkLoginMiddleware, (req, res) => {
   // let id = shortid.generate();
