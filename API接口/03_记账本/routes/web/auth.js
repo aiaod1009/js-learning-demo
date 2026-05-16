@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const UserModel = require('../../models/UserModel')
+const md5 = require('md5')
 //注册
 router.get('/reg', (req, res) => {
   res.render('auth/reg');
@@ -10,7 +11,7 @@ router.get('/reg', (req, res) => {
 router.post('/reg', (req, res) => {
   // 可做表单验证
   // 获取用户提交的用户名和密码
-  UserModel.create(req.body, (err, data) => {
+  UserModel.create({ ...req.body, password: md5(req.body.password) }, (err, data) => {
     if (err) {
       res.status(500).send('注册失败，请稍后再试~~');;
       return
@@ -18,4 +19,10 @@ router.post('/reg', (req, res) => {
     res.render('success', { msg: '注册成功', url: '/login' });
   })
 });
+
+//登录
+router.get('/login', (req, res) => {
+  res.render('auth/login');
+})
+
 module.exports = router;
