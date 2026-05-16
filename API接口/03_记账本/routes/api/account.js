@@ -1,62 +1,33 @@
 const express = require('express');
-const router = express.Router();
 const jwt = require('jsonwebtoken')
-
+//导入中间件
+let chheckTokenMiddleware = require('../../middlewares/checkTokenMiddlewaree');
+const router = express.Router();
 const moment = require('moment');
 const AccountModel = require('../../models/AccountModel');
 
-//声明中间件
-let chheckTokenMiddleware = (req, res, next) => {
-  let token = req.get('token')
-  if (!token) {
-    return res.json({
-      code: '2003',
-      msg: 'token 缺失',
-      data: null
-    })
-  }
-}
+
 //记账本列表
-router.get('/account', function (req, res, next) {
-  //获取token
-  let token = req.get('token')
-  if (!token) {
-    return res.json({
-      code: '2003',
-      msg: 'token 缺失',
-      data: null
-    })
-  }
-  //校验token
-  jwt.verify(token, 'atguigu', (err, data) => {
-    //检测token是否正确
+router.get('/account', chheckTokenMiddleware, function (req, res, next) {
+  AccountModel.find().sort({ time: -1 }).exec((err, data) => {
     if (err) {
-      return res.json({
-        code: '2004',
-        msg: 'token 校验失败~~',
+      res.json({
+        code: '1001',
+        msg: '读取失败了哦~~~',
         data: null
       })
+      return;
     }
-    AccountModel.find().sort({ time: -1 }).exec((err, data) => {
-      if (err) {
-        res.json({
-          code: '1001',
-          msg: '读取失败了哦~~~',
-          data: null
-        })
-        return;
-      }
-      res.json({
-        code: '0000',
-        msg: '读取成功',
-        data: data
-      });
+    res.json({
+      code: '0000',
+      msg: '读取成功',
+      data: data
     });
-  })
+  });
 });
 
 //新增记录
-router.post('/account', (req, res) => {
+router.post('/account', chheckTokenMiddleware, (req, res) => {
   AccountModel.create({
     ...req.body,
     time: moment(req.body.time).toDate()
@@ -78,7 +49,7 @@ router.post('/account', (req, res) => {
 });
 
 //删除记录
-router.delete('/account/:id', (req, res) => {
+router.delete('/account/:id', chheckTokenMiddleware, (req, res) => {
   //获取params.id
   let id = req.params.id;
   AccountModel.deleteOne({ _id: id }, (err, data) => {
@@ -99,7 +70,7 @@ router.delete('/account/:id', (req, res) => {
 });
 
 //获取单个账单信息
-router.get('/account/:id', (req, res) => {
+router.get('/account/:id', chheckTokenMiddleware, (req, res) => {
   //获取id参数
   let { id } = req.params;
   AccountModel.findById(id, (err, data) => {
@@ -119,7 +90,7 @@ router.get('/account/:id', (req, res) => {
 });
 
 //更新单个账单信息
-router.patch('/account/:id', (req, res) => {
+router.patch('/account/:id', chheckTokenMiddleware, (req, res) => {
   let { id } = req.params;
   AccountModel.updateOne({ _id: id }, req.body, (err, data) => {
     if (err) {
