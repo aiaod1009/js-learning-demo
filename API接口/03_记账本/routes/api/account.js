@@ -5,6 +5,17 @@ const jwt = require('jsonwebtoken')
 const moment = require('moment');
 const AccountModel = require('../../models/AccountModel');
 
+//声明中间件
+let chheckTokenMiddleware = (req, res, next) => {
+  let token = req.get('token')
+  if (!token) {
+    return res.json({
+      code: '2003',
+      msg: 'token 缺失',
+      data: null
+    })
+  }
+}
 //记账本列表
 router.get('/account', function (req, res, next) {
   //获取token
@@ -18,23 +29,30 @@ router.get('/account', function (req, res, next) {
   }
   //校验token
   jwt.verify(token, 'atguigu', (err, data) => {
-
-  })
-  AccountModel.find().sort({ time: -1 }).exec((err, data) => {
+    //检测token是否正确
     if (err) {
-      res.json({
-        code: '1001',
-        msg: '读取失败了哦~~~',
+      return res.json({
+        code: '2004',
+        msg: 'token 校验失败~~',
         data: null
       })
-      return;
     }
-    res.json({
-      code: '0000',
-      msg: '读取成功',
-      data: data
+    AccountModel.find().sort({ time: -1 }).exec((err, data) => {
+      if (err) {
+        res.json({
+          code: '1001',
+          msg: '读取失败了哦~~~',
+          data: null
+        })
+        return;
+      }
+      res.json({
+        code: '0000',
+        msg: '读取成功',
+        data: data
+      });
     });
-  });
+  })
 });
 
 //新增记录
