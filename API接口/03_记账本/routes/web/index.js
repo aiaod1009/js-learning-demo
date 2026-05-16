@@ -3,9 +3,12 @@ var router = express.Router();
 
 const moment = require('moment');
 const AccountModel = require('../../models/AccountModel');
+let checkLoginMiddleware = require('../../middlewares/checkLoginMiddleware');
 
 //记账本列表
-router.get('/account', function (req, res, next) {
+router.get('/account', checkLoginMiddleware, function (req, res, next) {
+  //判断
+
   //获取所有的账单信息
   // let accounts = db.get('accounts').value();
   AccountModel.find().sort({ time: -1 }).exec((err, data) => {
@@ -20,11 +23,11 @@ router.get('/account', function (req, res, next) {
   });
 });
 //添加记录
-router.get('/account/create', function (req, res, next) {
+router.get('/account/create', checkLoginMiddleware, function (req, res, next) {
   res.render('create');
 });
 //新增记录
-router.post('/account', (req, res) => {
+router.post('/account', checkLoginMiddleware, (req, res) => {
   // let id = shortid.generate();
   // db.get('accounts').unshift({ id: id, ...req.body }).write();
   // 数字转成日期对象moment.js
@@ -45,7 +48,7 @@ router.post('/account', (req, res) => {
 });
 
 //删除记录
-router.get('/account/:id', (req, res) => {
+router.get('/account/:id', checkLoginMiddleware, (req, res) => {
   //获取params.id
   let id = req.params.id;
   // db.get('accounts').remove({ id: id }).write();
