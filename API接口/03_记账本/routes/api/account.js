@@ -1,14 +1,15 @@
 const express = require('express');
 const jwt = require('jsonwebtoken')
 //导入中间件
-let chheckTokenMiddleware = require('../../middlewares/checkTokenMiddlewaree');
+let checkTokenMiddleware = require('../../middlewares/checkTokenMiddleware');
 const router = express.Router();
 const moment = require('moment');
 const AccountModel = require('../../models/AccountModel');
 
 
 //记账本列表
-router.get('/account', chheckTokenMiddleware, function (req, res, next) {
+router.get('/account', checkTokenMiddleware, function (req, res, next) {
+  console.log('👉 路由里的req.user:', req.user);
   AccountModel.find().sort({ time: -1 }).exec((err, data) => {
     if (err) {
       res.json({
@@ -27,7 +28,7 @@ router.get('/account', chheckTokenMiddleware, function (req, res, next) {
 });
 
 //新增记录
-router.post('/account', chheckTokenMiddleware, (req, res) => {
+router.post('/account', checkTokenMiddleware, (req, res) => {
   AccountModel.create({
     ...req.body,
     time: moment(req.body.time).toDate()
@@ -49,7 +50,7 @@ router.post('/account', chheckTokenMiddleware, (req, res) => {
 });
 
 //删除记录
-router.delete('/account/:id', chheckTokenMiddleware, (req, res) => {
+router.delete('/account/:id', checkTokenMiddleware, (req, res) => {
   //获取params.id
   let id = req.params.id;
   AccountModel.deleteOne({ _id: id }, (err, data) => {
@@ -70,7 +71,7 @@ router.delete('/account/:id', chheckTokenMiddleware, (req, res) => {
 });
 
 //获取单个账单信息
-router.get('/account/:id', chheckTokenMiddleware, (req, res) => {
+router.get('/account/:id', checkTokenMiddleware, (req, res) => {
   //获取id参数
   let { id } = req.params;
   AccountModel.findById(id, (err, data) => {
@@ -90,7 +91,7 @@ router.get('/account/:id', chheckTokenMiddleware, (req, res) => {
 });
 
 //更新单个账单信息
-router.patch('/account/:id', chheckTokenMiddleware, (req, res) => {
+router.patch('/account/:id', checkTokenMiddleware, (req, res) => {
   let { id } = req.params;
   AccountModel.updateOne({ _id: id }, req.body, (err, data) => {
     if (err) {

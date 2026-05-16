@@ -19,6 +19,8 @@ module.exports = (req, res, next) => {
         data: null
       })
     }
+    //保存用户信息
+    req.user = data;
     //如果token校验成功
     next();
   })
