@@ -1,13 +1,25 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const jwt = require('jsonwebtoken')
 
 const moment = require('moment');
 const AccountModel = require('../../models/AccountModel');
 
 //记账本列表
 router.get('/account', function (req, res, next) {
-  //获取所有的账单信息
-  // let accounts = db.get('accounts').value();
+  //获取token
+  let token = req.get('token')
+  if (!token) {
+    return res.json({
+      code: '2003',
+      msg: 'token 缺失',
+      data: null
+    })
+  }
+  //校验token
+  jwt.verify(token, 'atguigu', (err, data) => {
+
+  })
   AccountModel.find().sort({ time: -1 }).exec((err, data) => {
     if (err) {
       res.json({

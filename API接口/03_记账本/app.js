@@ -6,6 +6,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/web/index');
 const authRouter = require('./routes/web/auth');
+const authApiRouter = require('./routes/api/auth');
+//导入account接口路由文件
 const accountRouter = require('./routes/api/account');
 //导入 express-session 模块
 const session = require("express-session");
@@ -40,6 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/', authRouter);
+app.use('/api', authApiRouter);
 app.use('/api', accountRouter);
 
 
