@@ -2,9 +2,10 @@ var express = require('express');
 var router = express.Router();
 // 导入jwt
 const jwt = require('jsonwebtoken');
+const { secret } = require('../../config/config');
+
 const UserModel = require('../../models/UserModel')
 const md5 = require('md5');
-const { token } = require('morgan');
 
 
 
@@ -32,7 +33,7 @@ router.post('/login', (req, res) => {
     }
     let token = jwt.sign({
       username: data.username,
-    }, 'atguigu', {
+    }, secret, {
       expiresIn: 60 * 60 * 24 * 7
     });
     console.log(token);

@@ -1,4 +1,6 @@
-model.exports = (req, res, next) => {
+const jwt = require('jsonwebtoken')
+const { secret } = require('../config/config');
+module.exports = (req, res, next) => {
   let token = req.get('token')
   if (!token) {
     return res.json({
@@ -8,7 +10,7 @@ model.exports = (req, res, next) => {
     })
   }
   //校验token
-  jwt.verify(token, 'atguigu', (err, data) => {
+  jwt.verify(token, secret, (err, data) => {
     //检测token是否正确
     if (err) {
       return res.json({
